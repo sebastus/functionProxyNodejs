@@ -29,8 +29,9 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
         var claims = req.authInfo;
-        console.log("User info: ", req.user);
-        console.log("Validated claims: ", claims);
+        //console.log("User info: ", req.user);
+        //console.log("Validated claims: ", claims);
+        console.log("body text: ", JSON.ToString(req.body));
         res.status(200).json({ name: "xyzzy", body: req.body.name });
     }
 );
