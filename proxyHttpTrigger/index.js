@@ -32,7 +32,7 @@ app.post(
         //console.log("User info: ", req.user);
         //console.log("Validated claims: ", claims);
         console.log("body text: ", JSON.stringify(req.body));
-        res.status(200).json({ name: "xyzzy", body: "test" });
+        res.status(200).json(req.body);
     }
 );
 
