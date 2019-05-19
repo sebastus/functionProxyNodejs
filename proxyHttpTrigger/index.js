@@ -2,6 +2,7 @@ const createHandler = require("azure-function-express").createHandler;
 const express = require("express");
 const passport = require('passport');
 const request = require('request');
+const util = require('util');
 
 var tenantId = process.env.TENANT_ID;
 var clientId = process.env.CLIENT_ID;
