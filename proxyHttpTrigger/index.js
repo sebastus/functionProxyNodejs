@@ -27,8 +27,6 @@ var bearerStrategy = new BearerStrategy(bearerStrategyOptions, function (token, 
 });
 passport.use(bearerStrategy);
 
-console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
-
 var requestOptions = {
     url: process.env.SPLUNK_ADDRESS,
     headers: {
@@ -43,6 +41,8 @@ app.post(
         // var claims = req.authInfo;
         // console.log("User info: ", req.user);
         // console.log("Validated claims: ", JSON.stringify(claims));
+
+        console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
 
         requestOptions.body = JSON.stringify(req.body);
         // console.log('body text: ', JSON.stringify(req.body));
