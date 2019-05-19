@@ -17,6 +17,8 @@ var options = {
     passReqToCallback: false
 };
 
+console.log("Bearer strategy options: ", JSON.stringify(options));
+
 var bearerStrategy = new BearerStrategy(options, function (token, done) {
     done(null, {}, token);
 });
