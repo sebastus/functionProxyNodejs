@@ -3,13 +3,17 @@ const express = require("express");
 const passport = require('passport');
 const request = require('request');
 
+var tenantId = process.env.TENANT_ID;
+var clientId = process.env.CLIENT_ID;
+var audience = process.env.AUDIENCE;
+
 var BearerStrategy = require("passport-azure-ad").BearerStrategy;
 var options = {
-    identityMetadata: "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0/.well-known/openid-configuration",
-    clientID: "e08cb344-1556-424a-9aeb-b3cfe4192b7f",
-    issuer: "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/",
-    audience: "https://azuremonitorfunctionproxy.microsoft.onmicrosoft.com",
-    loggingLevel: "info",
+    identityMetadata: util.format("https://login.microsoftonline.com/%s/v2.0/.well-known/openid-configuration", tenantId),
+    clientID: clientId,
+    issuer: util.format("https://sts.windows.net/%s/", tenantId),
+    audience: audience,
+    loggingLevel: "error",
     passReqToCallback: false
 };
 
@@ -24,12 +28,10 @@ app.use(require('body-parser').urlencoded({"extended":true}));
 app.use(passport.initialize());
 passport.use(bearerStrategy);
 
-var splunkToken = process.env.SPLUNK_TOKEN;
-
 var options = {
-    url: 'http://asplunk.uksouth.cloudapp.azure.com:8088/services/collector',
+    url: process.env.SPLUNK_ADDRESS,
     headers: {
-        'Authorization': 'Splunk ' + splunkToken
+        'Authorization': 'Splunk ' + process.env.SPLUNK_TOKEN
     }
 }
 // This is where your API methods are exposed
