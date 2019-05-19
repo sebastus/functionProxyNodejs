@@ -41,9 +41,8 @@ app.post(
         // console.log("User info: ", req.user);
         // console.log("Validated claims: ", JSON.stringify(claims));
 
-        options.body = req.body;
+        options.body = JSON.stringify(req.body);
         console.log('body text: ', JSON.stringify(req.body));
-        console.log("typeof body: ", typeof(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
