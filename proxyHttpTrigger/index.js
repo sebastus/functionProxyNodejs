@@ -42,7 +42,7 @@ app.post(
         // console.log("Validated claims: ", JSON.stringify(claims));
 
         options.body = req.body;
-        console.log('body text: ', req.body);
+        console.log('body text: ', JSON.stringify(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
