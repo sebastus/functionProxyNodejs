@@ -50,7 +50,7 @@ app.post(
                 res.status(500);
             } else {
                 console.log('statusCode:', response && response.statusCode);
-                res.status(200);
+                res.status(200).end();
             }
         });
     }
