@@ -28,8 +28,8 @@ var splunkToken = "044afcd1-24f8-4334-8d83-b9c5a809a6b6";
 
 var options = {
     url: 'http://asplunk.uksouth.cloudapp.azure.com:8088/services/collector',
-    auth: {
-        bearer: 'Splunk ' + splunkToken
+    headers: {
+        'Authorization': 'Splunk ' + splunkToken
     }
 }
 // This is where your API methods are exposed
