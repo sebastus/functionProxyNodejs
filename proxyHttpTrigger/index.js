@@ -24,7 +24,7 @@ app.use(require('body-parser').urlencoded({"extended":true}));
 app.use(passport.initialize());
 passport.use(bearerStrategy);
 
-var splunkToken = "044afcd1-24f8-4334-8d83-b9c5a809a6b6";
+var splunkToken = process.env.SPLUNK_TOKEN;
 
 var options = {
     url: 'http://asplunk.uksouth.cloudapp.azure.com:8088/services/collector',
@@ -42,14 +42,14 @@ app.post(
         // console.log("Validated claims: ", JSON.stringify(claims));
 
         options.body = JSON.stringify(req.body);
-        console.log('body text: ', JSON.stringify(req.body));
+        // console.log('body text: ', JSON.stringify(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
                 console.error('error:', error); // Print the error if one occurred
                 res.status(500);
             } else {
-                console.log('statusCode:', response && response.statusCode);
+                // console.log('statusCode:', response && response.statusCode);
                 res.status(200).end();
             }
         });
