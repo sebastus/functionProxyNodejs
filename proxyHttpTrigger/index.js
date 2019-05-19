@@ -1,6 +1,7 @@
 const createHandler = require("azure-function-express").createHandler;
 const express = require("express");
 const passport = require('passport');
+const request = require('request');
 
 var BearerStrategy = require("passport-azure-ad").BearerStrategy;
 var options = {
@@ -23,16 +24,29 @@ app.use(require('body-parser').urlencoded({"extended":true}));
 app.use(passport.initialize());
 passport.use(bearerStrategy);
 
+var splunkToken = "044afcd1-24f8-4334-8d83-b9c5a809a6b6";
+
+var options = {
+    url: 'http://asplunk.uksouth.cloudapp.azure.com:8088/services/collector',
+    auth: {
+        bearer: 'Splunk ' + splunkToken
+    }
+}
 // This is where your API methods are exposed
 app.post(
     "/api/sendToSplunk",
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
-        var claims = req.authInfo;
-        //console.log("User info: ", req.user);
-        console.log("Validated claims: ", JSON.stringify(claims));
-        console.log("body text: ", JSON.stringify(req.body));
-        res.status(200).json(req.body);
+        // var claims = req.authInfo;
+        // console.log("User info: ", req.user);
+        // console.log("Validated claims: ", JSON.stringify(claims));
+
+        options.body = req.body;
+        request.post(options, function (error, response, body) {
+            console.error('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        });
+        res.status(200);
     }
 );
 
