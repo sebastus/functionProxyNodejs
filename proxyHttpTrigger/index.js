@@ -13,7 +13,7 @@ var options = {
     clientID: clientId,
     issuer: util.format("https://sts.windows.net/%s/", tenantId),
     audience: audience,
-    loggingLevel: "error",
+    loggingLevel: "info",
     passReqToCallback: false
 };
 
