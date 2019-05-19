@@ -42,9 +42,14 @@ app.post(
         // console.log("Validated claims: ", JSON.stringify(claims));
 
         options.body = req.body;
+        console.log('body text: ', req.body);
+
         request.post(options, function (error, response, body) {
-            console.error('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            if (error) {
+                console.error('error:', error); // Print the error if one occurred
+            } else {
+                console.log('statusCode:', response && response.statusCode);
+            }
         });
         res.status(200);
     }
