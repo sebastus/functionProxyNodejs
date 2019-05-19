@@ -43,6 +43,7 @@ app.post(
 
         options.body = req.body;
         console.log('body text: ', JSON.stringify(req.body));
+        console.log("typeof body: ", typeof(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
