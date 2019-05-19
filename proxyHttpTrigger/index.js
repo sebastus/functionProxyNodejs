@@ -47,11 +47,12 @@ app.post(
         request.post(options, function (error, response, body) {
             if (error) {
                 console.error('error:', error); // Print the error if one occurred
+                res.status(500);
             } else {
                 console.log('statusCode:', response && response.statusCode);
+                res.status(200);
             }
         });
-        res.status(200);
     }
 );
 
