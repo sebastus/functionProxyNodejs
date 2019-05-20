@@ -10,6 +10,15 @@ var audience = process.env.AUDIENCE;
 var splunkToken = process.env.SPLUNK_TOKEN;
 var splunkAddress = process.env.SPLUNK_ADDRESS;
 
+var app = express();
+app.use(require('morgan')('immediate'));
+app.use(require('body-parser').urlencoded({"extended":true}));
+app.use(passport.initialize());
+
+if (!tenantId || !clientId || !audience || !splunkAddress || !splunkToken) {
+    console.log("Environment variables are required: TENANT_ID, CLIENT_ID, AUDIENCE, SPLUNK_ADDRESS, SPLUNK_TOKEN.");
+}
+
 var s1 = util.format("https://login.microsoftonline.com/%s/v2.0/.well-known/openid-configuration", tenantId);
 var s2 = util.format("https://sts.windows.net/%s/", tenantId);
 
@@ -27,11 +36,6 @@ var bearerStrategy = new BearerStrategy(bearerStrategyOptions, function (token, 
     done(null, {}, token);
 });
 
-var app = express();
-
-app.use(require('morgan')('combined'));
-app.use(require('body-parser').urlencoded({"extended":true}));
-app.use(passport.initialize());
 passport.use(bearerStrategy);
 
 var options = {
@@ -40,6 +44,8 @@ var options = {
         'Authorization': 'Splunk ' + splunkToken
     }
 };
+
+app.use(require('morgan')('combined'));
 
 // This is where your API methods are exposed
 app.post(
