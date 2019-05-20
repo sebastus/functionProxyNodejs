@@ -53,13 +53,13 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
 
-        console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
-        console.log("AuthInfo: ", JSON.stringify(req.authinfo));
+        // console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
+        console.log("AuthInfo: ", JSON.stringify(req.authInfo));
         // console.log("s1: ", s1);
         // console.log("s2: ", s2);
 
         options.body = JSON.stringify(req.body);
-        console.log('body text: ', JSON.stringify(req.body));
+        // console.log('body text: ', JSON.stringify(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
