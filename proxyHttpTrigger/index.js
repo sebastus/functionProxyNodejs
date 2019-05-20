@@ -9,6 +9,7 @@ var clientId = process.env.CLIENT_ID;
 var audience = process.env.AUDIENCE;
 var splunkToken = process.env.SPLUNK_TOKEN;
 var splunkAddress = process.env.SPLUNK_ADDRESS;
+var loggingLevel = process.env.LOGGING_LEVEL;
 
 var app = express();
 app.use(require('morgan')('immediate'));
@@ -28,7 +29,7 @@ var bearerStrategyOptions = {
     clientID: clientId,
     issuer: s2,
     audience: audience,
-    loggingLevel: "error",
+    loggingLevel: loggingLevel || "error",
     passReqToCallback: false
 };
 
@@ -53,13 +54,14 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
 
-        // console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
-        console.log("AuthInfo: ", JSON.stringify(req.authInfo));
-        // console.log("s1: ", s1);
-        // console.log("s2: ", s2);
+        console.debug("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
+        console.debug("AuthInfo: ", JSON.stringify(req.authInfo));
+        
+        console.debug("s1: ", s1);
+        console.debug("s2: ", s2);
 
         options.body = JSON.stringify(req.body);
-        // console.log('body text: ', JSON.stringify(req.body));
+        console.debug('body text: ', JSON.stringify(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
