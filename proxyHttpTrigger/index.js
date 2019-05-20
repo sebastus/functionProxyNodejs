@@ -19,7 +19,7 @@ var bearerStrategyOptions = {
     clientID: clientId,
     issuer: s2,
     audience: audience,
-    loggingLevel: "info",
+    loggingLevel: "error",
     passReqToCallback: false
 };
 
@@ -45,9 +45,6 @@ app.post(
     "/api/sendToSplunk",
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
-        // var claims = req.authInfo;
-        // console.log("User info: ", req.user);
-        // console.log("Validated claims: ", JSON.stringify(claims));
 
         // console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
         // console.log("s1: ", s1);
@@ -58,10 +55,9 @@ app.post(
 
         request.post(options, function (error, response, body) {
             if (error) {
-                console.error('error:', error); // Print the error if one occurred
+                console.error('error:', error); 
                 res.status(500);
             } else {
-                // console.log('statusCode:', response && response.statusCode);
                 res.status(200).end();
             }
         });
