@@ -54,14 +54,14 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
 
-        console.debug("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
-        console.debug("AuthInfo: ", JSON.stringify(req.authInfo));
+        //console.debug("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
+        //console.debug("AuthInfo: ", JSON.stringify(req.authInfo));
         
-        console.debug("s1: ", s1);
-        console.debug("s2: ", s2);
+        //console.debug("s1: ", s1);
+        //console.debug("s2: ", s2);
 
         options.body = JSON.stringify(req.body);
-        console.debug('body text: ', JSON.stringify(req.body));
+        //console.debug('body text: ', JSON.stringify(req.body));
 
         request.post(options, function (error, response, body) {
             if (error) {
