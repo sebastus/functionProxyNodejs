@@ -28,7 +28,7 @@ var bearerStrategyOptions = {
     clientID: clientId,
     issuer: s2,
     audience: audience,
-    loggingLevel: "info",
+    loggingLevel: "error",
     passReqToCallback: false
 };
 
