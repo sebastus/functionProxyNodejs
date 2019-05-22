@@ -1,5 +1,6 @@
 index.txt
 index2.txt
+*.zip
 
 # Logs
 logs
