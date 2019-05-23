@@ -3,6 +3,10 @@ var express = require("express");
 var passport = require('passport');
 var request = require('request');
 var util = require('util');
+var fs = require('fs');
+var path = require('path');
+var certFile = path.resolve(__dirname, 'ssl/client.crt');
+var keyFile = path.resolve(__dirname, 'ssl/client.key');
 
 var tenantId = process.env.TENANT_ID;
 var clientId = process.env.CLIENT_ID;
@@ -10,6 +14,10 @@ var audience = process.env.AUDIENCE;
 var splunkToken = process.env.SPLUNK_TOKEN;
 var splunkAddress = process.env.SPLUNK_ADDRESS;
 var loggingLevel = process.env.LOGGING_LEVEL;
+
+// ******************* INSECURE *************************
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+// ******************* INSECURE *************************
 
 var app = express();
 app.use(require('morgan')('immediate'));
@@ -43,7 +51,10 @@ var options = {
     url: splunkAddress,
     headers: {
         'Authorization': 'Splunk ' + splunkToken
-    }
+    },
+    cert: fs.readFileSync(certFile),
+    key: fs.readFileSync(keyFile),
+    passphrase: 'MoDP@ssWyrd'
 };
 
 app.use(require('morgan')('combined'));
