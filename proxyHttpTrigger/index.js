@@ -54,7 +54,7 @@ var bearerStrategy = new BearerStrategy(bearerStrategyOptions, function (token, 
 
 passport.use(bearerStrategy);
 
-var options = {
+var requestOptions = {
     url: splunkAddress,
     headers: {
         'Authorization': 'Splunk ' + splunkToken
@@ -63,6 +63,7 @@ var options = {
     key: keyString,
     passphrase: 'MoDP@ssWyrd'
 };
+console.log("requestOptions: ", JSON.stringify(requestOptions));
 
 app.use(require('morgan')('combined'));
 
@@ -78,12 +79,12 @@ app.post(
         //console.debug("s1: ", s1);
         //console.debug("s2: ", s2);
 
-        options.body = JSON.stringify(req.body);
+        requestOptions.body = JSON.stringify(req.body);
         //console.debug('body text: ', JSON.stringify(req.body));
 
-        request.post(options, function (error, response, body) {
+        request.post(requestOptions, function (error, response, body) {
             if (error) {
-                console.error('error:', JSON.stringify(error)); 
+                console.error('error:', JSON.stringify(error));
                 res.status(500).end();
             } else {
                 res.status(200).end();
