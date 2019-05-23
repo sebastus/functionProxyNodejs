@@ -28,6 +28,13 @@ if (!tenantId || !clientId || !audience || !splunkAddress || !splunkToken) {
     console.log("Environment variables are required: TENANT_ID, CLIENT_ID, AUDIENCE, SPLUNK_ADDRESS, SPLUNK_TOKEN.");
 }
 
+try {
+    var certString = fs.readFileSync(certFile);
+    var keyString = fs.readFileSync(keyFile);
+} catch(err) {
+    console.log("Unable to read cert files. Error: ", JSON.stringify(err));
+}
+
 var s1 = util.format("https://login.microsoftonline.com/%s/v2.0/.well-known/openid-configuration", tenantId);
 var s2 = util.format("https://sts.windows.net/%s/", tenantId);
 
@@ -52,8 +59,8 @@ var options = {
     headers: {
         'Authorization': 'Splunk ' + splunkToken
     },
-    cert: fs.readFileSync(certFile),
-    key: fs.readFileSync(keyFile),
+    cert: certString,
+    key: keyString,
     passphrase: 'MoDP@ssWyrd'
 };
 
@@ -76,7 +83,7 @@ app.post(
 
         request.post(options, function (error, response, body) {
             if (error) {
-                console.error('error:', error); 
+                console.error('error:', JSON.stringify(error)); 
                 res.status(500).end();
             } else {
                 res.status(200).end();
