@@ -66,7 +66,7 @@ app.post(
         request.post(options, function (error, response, body) {
             if (error) {
                 console.error('error:', error); 
-                res.status(500);
+                res.status(500).end();
             } else {
                 res.status(200).end();
             }
