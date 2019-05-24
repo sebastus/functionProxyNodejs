@@ -60,10 +60,11 @@ var requestOptions = {
     headers: {
         'Authorization': 'Splunk ' + splunkToken
     },
-    agentOptions: {
-        ca: fs.readFileSync(cacertFile)
-    }   
+    cert: certString,
+    key: keyString,
+    passphrase: 'MoDP@ssWyrd'
 };
+
 //console.log("requestOptions: ", JSON.stringify(requestOptions));
 
 app.use(require('morgan')('combined'));
