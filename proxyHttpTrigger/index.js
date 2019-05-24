@@ -59,7 +59,10 @@ var requestOptions = {
     url: splunkAddress,
     headers: {
         'Authorization': 'Splunk ' + splunkToken
-    }  
+    },
+    agentOptions: {
+        ca: fs.readFileSync(cacertFile)
+    }   
 };
 //console.log("requestOptions: ", JSON.stringify(requestOptions));
 
