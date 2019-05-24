@@ -7,6 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var certFile = path.resolve(__dirname, 'ssl/splunk.crt');
 var keyFile = path.resolve(__dirname, 'ssl/splunk.key');
+var cacertFile = path.resolve(__dirname, 'ssl/splunkcacert.pem');
 
 var tenantId = process.env.TENANT_ID;
 var clientId = process.env.CLIENT_ID;
@@ -59,8 +60,7 @@ var requestOptions = {
     headers: {
         'Authorization': 'Splunk ' + splunkToken
     },
-    cert: certString,
-    key: keyString    
+    ca: fs.readFileSync(cacertFile)    
 };
 //console.log("requestOptions: ", JSON.stringify(requestOptions));
 
