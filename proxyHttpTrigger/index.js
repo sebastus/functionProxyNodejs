@@ -60,10 +60,14 @@ var requestOptions = {
     headers: {
         'Authorization': 'Splunk ' + splunkToken
     },
-    cert: certString,
-    key: keyString,
-    passphrase: 'MoDP@ssWyrd'
+    agentOptions: {
+        ca: fs.readFileSync(cacertFile)
+    },
+    hostname: "standalone-vm"
 };
+// cert: certString,
+// key: keyString,
+// passphrase: 'MoDP@ssWyrd'
 
 //console.log("requestOptions: ", JSON.stringify(requestOptions));
 
