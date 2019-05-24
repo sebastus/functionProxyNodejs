@@ -85,7 +85,13 @@ app.post(
 
         request.post(requestOptions, function (error, response, body) {
             if (error) {
-                console.error('error:', JSON.stringify(error));
+                var msg = '';
+                if (typeof(error) == 'object') {
+                    msg = JSON.stringify(error);
+                } else {
+                    msg = error;
+                }
+                console.error('error:', msg);
                 res.status(500).end();
             } else {
                 res.status(200).end();
