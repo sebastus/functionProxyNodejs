@@ -5,8 +5,8 @@ var request = require('request');
 var util = require('util');
 var fs = require('fs');
 var path = require('path');
-var certFile = path.resolve(__dirname, 'ssl/client.crt');
-var keyFile = path.resolve(__dirname, 'ssl/client.key');
+var certFile = path.resolve(__dirname, 'ssl/splunk.crt');
+var keyFile = path.resolve(__dirname, 'ssl/splunk.key');
 
 var tenantId = process.env.TENANT_ID;
 var clientId = process.env.CLIENT_ID;
@@ -60,10 +60,9 @@ var requestOptions = {
         'Authorization': 'Splunk ' + splunkToken
     },
     cert: certString,
-    key: keyString,
-    passphrase: 'MoDP@ssWyrd'
+    key: keyString    
 };
-console.log("requestOptions: ", JSON.stringify(requestOptions));
+//console.log("requestOptions: ", JSON.stringify(requestOptions));
 
 app.use(require('morgan')('combined'));
 
