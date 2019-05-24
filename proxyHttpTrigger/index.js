@@ -59,7 +59,7 @@ var requestOptions = {
     url: splunkAddress,
     headers: {
         'Authorization': 'Splunk ' + splunkToken,
-        'Host': 'standalone-vm'
+        'Host': 'SplunkServerDefaultCert'
     },
     agentOptions: {
         ca: fs.readFileSync(cacertFile)
