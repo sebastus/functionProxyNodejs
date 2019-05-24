@@ -17,7 +17,7 @@ var splunkAddress = process.env.SPLUNK_ADDRESS;
 var loggingLevel = process.env.LOGGING_LEVEL;
 
 // ******************* INSECURE *************************
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 // ******************* INSECURE *************************
 
 var app = express();
