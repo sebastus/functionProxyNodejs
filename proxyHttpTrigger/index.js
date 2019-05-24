@@ -60,7 +60,9 @@ var requestOptions = {
     headers: {
         'Authorization': 'Splunk ' + splunkToken
     },
-    ca: fs.readFileSync(cacertFile)    
+    agentOptions: {
+        ca: fs.readFileSync(cacertFile)
+    }   
 };
 //console.log("requestOptions: ", JSON.stringify(requestOptions));
 
