@@ -5,8 +5,6 @@ var request = require('request');
 var util = require('util');
 var fs = require('fs');
 var path = require('path');
-var certFile = path.resolve(__dirname, 'ssl/splunk.crt');
-var keyFile = path.resolve(__dirname, 'ssl/splunk.key');
 var cacertFile = path.resolve(__dirname, 'ssl/splunkcacert.pem');
 
 var tenantId = process.env.TENANT_ID;
@@ -15,6 +13,7 @@ var audience = process.env.AUDIENCE;
 var splunkToken = process.env.SPLUNK_TOKEN;
 var splunkAddress = process.env.SPLUNK_ADDRESS;
 var loggingLevel = process.env.LOGGING_LEVEL;
+var splunkCertCN = process.env.SPLUNK_CERT_CN || "SplunkServerDefaultCert";
 
 // ******************* INSECURE *************************
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -27,13 +26,6 @@ app.use(passport.initialize());
 
 if (!tenantId || !clientId || !audience || !splunkAddress || !splunkToken) {
     console.log("Environment variables are required: TENANT_ID, CLIENT_ID, AUDIENCE, SPLUNK_ADDRESS, SPLUNK_TOKEN.");
-}
-
-try {
-    var certString = fs.readFileSync(certFile);
-    var keyString = fs.readFileSync(keyFile);
-} catch(err) {
-    console.log("Unable to read cert files. Error: ", JSON.stringify(err));
 }
 
 var s1 = util.format("https://login.microsoftonline.com/%s/v2.0/.well-known/openid-configuration", tenantId);
@@ -59,7 +51,7 @@ var requestOptions = {
     url: splunkAddress,
     headers: {
         'Authorization': 'Splunk ' + splunkToken,
-        'Host': 'SplunkServerDefaultCert'
+        'Host': splunkCertCN
     },
     agentOptions: {
         ca: fs.readFileSync(cacertFile)
