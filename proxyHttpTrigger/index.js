@@ -58,12 +58,12 @@ passport.use(bearerStrategy);
 var requestOptions = {
     url: splunkAddress,
     headers: {
-        'Authorization': 'Splunk ' + splunkToken
+        'Authorization': 'Splunk ' + splunkToken,
+        'hostname': 'standalone-vm'
     },
     agentOptions: {
         ca: fs.readFileSync(cacertFile)
-    },
-    hostname: "standalone-vm"
+    }
 };
 // cert: certString,
 // key: keyString,
