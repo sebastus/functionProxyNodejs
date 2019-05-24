@@ -25,3 +25,5 @@ curl -X POST https://nodejsfunctionproxy.azurewebsites.net/api/sendToSplunk \
   -d '{"name":"joe"}'
 
 passphrase: 'MoDP@ssWyrd'
+
+curl -k https://acsplunk.ukwest.cloudapp.azure.com:8088/services/collector -H 'Authorization: Splunk d99b4ef8-7976-4312-a873-e5af7d9bb705' -d '{"sourcetype": "mysourcetype", "event":"Hello, World!"}' 
