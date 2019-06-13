@@ -90,8 +90,13 @@ app.post(
                 }
                 console.error('error:', msg);
                 res.status(500).end();
-            } else {
-                console.log(JSON.stringify(response));
+            } else if (response.statusCode != 200) {
+                console.log(JSON.stringify(response.body));
+                console.log(JSON.stringify(response.headers));
+                res.status(response.statusCode).end();
+            }
+            else {
+                console.log(JSON.stringify(body));
                 res.status(200).end();
             }
         });
