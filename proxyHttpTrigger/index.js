@@ -91,7 +91,7 @@ app.post(
                 console.error('error:', msg);
                 res.status(500).end();
             } else {
-                console.log(JSON.stringify(res));
+                console.log(JSON.stringify(response));
                 res.status(200).end();
             }
         });
