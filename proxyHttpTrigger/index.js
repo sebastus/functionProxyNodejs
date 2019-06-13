@@ -61,7 +61,7 @@ var requestOptions = {
 // key: keyString,
 // passphrase: 'MoDP@ssWyrd'
 
-console.log("requestOptions: ", JSON.stringify(requestOptions));
+// console.log("requestOptions: ", JSON.stringify(requestOptions));
 
 app.use(require('morgan')('combined'));
 
@@ -71,14 +71,14 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
 
-        console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
-        console.log("AuthInfo: ", JSON.stringify(req.authInfo));
+        //console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
+        //console.log("AuthInfo: ", JSON.stringify(req.authInfo));
         
-        console.log("s1: ", s1);
-        console.log("s2: ", s2);
+        //console.log("s1: ", s1);
+        //console.log("s2: ", s2);
 
         requestOptions.body = JSON.stringify(req.body);
-        console.log('body text: ', JSON.stringify(req.body));
+        //console.log('body text: ', JSON.stringify(req.body));
 
         request.post(requestOptions, function (error, response, body) {
             if (error) {
@@ -91,6 +91,7 @@ app.post(
                 console.error('error:', msg);
                 res.status(500).end();
             } else {
+                console.log(JSON.stringify(res.body));
                 res.status(200).end();
             }
         });

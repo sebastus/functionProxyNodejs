@@ -1,6 +1,7 @@
 index.txt
 index2.txt
 *.zip
+proxyHttpTrigger/ssl/splunkcacert-trial.pem
 
 # Logs
 logs
