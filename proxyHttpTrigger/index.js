@@ -89,13 +89,19 @@ app.post(
                     msg = error;
                 }
                 console.error('error:', msg);
-                console.error(JSON.stringify(response));
                 res.status(500).end();
-            } else if (response.statusCode != 200) {
-                console.log(JSON.stringify(response.body));
-                console.log(JSON.stringify(response.headers));
+            } else if (response) {
+                
+                if (response.statusCode != 200) {
+                    console.log(JSON.stringify(response.body));
+                    console.log(JSON.stringify(response.headers));
+                }
+
+                res.status(response.statusCode).end();
+
+            } else {
+                res.status(500).end();
             }
-            res.status(response.statusCode).end();
         });
     }
 );
