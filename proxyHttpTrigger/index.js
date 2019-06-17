@@ -78,7 +78,6 @@ app.post(
         //console.log("s2: ", s2);
 
         requestOptions.body = JSON.stringify(req.body);
-        //console.log('body text: ', JSON.stringify(req.body));
 
         request.post(requestOptions, function (error, response, body) {
             if (error) {
@@ -93,8 +92,9 @@ app.post(
             } else if (response) {
                 
                 if (response.statusCode != 200) {
-                    console.log(JSON.stringify(response.body));
-                    console.log(JSON.stringify(response.headers));
+                    console.log('request body: ', JSON.stringify(req.body));
+                    console.log('response body: ', JSON.stringify(response.body));
+                    console.log('headers: ', JSON.stringify(response.headers));
                 }
 
                 res.status(response.statusCode).end();
