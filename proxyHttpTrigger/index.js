@@ -50,6 +50,7 @@ passport.use(bearerStrategy);
 var requestOptions = {
     url: splunkAddress,
     headers: {
+        'Content-Type': 'application/json',
         'Authorization': 'Splunk ' + splunkToken,
         'Host': splunkCertCN
     },
