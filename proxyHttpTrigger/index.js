@@ -35,7 +35,7 @@ var bearerStrategyOptions = {
 
 var BearerStrategy = require("passport-azure-ad").BearerStrategy;
 var bearerStrategy = new BearerStrategy(bearerStrategyOptions, function (token, done) {
-    console.log('token: ', JSON.stringify(token));
+    //console.log('token: ', JSON.stringify(token));
     done(null, {}, token);
 });
 passport.use(bearerStrategy);
@@ -45,7 +45,6 @@ app.post(
     "/api/sendToSplunk",
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
-        console.log('request body: ', req.body);
 
         var requestOptions = {
             url: splunkAddress,
