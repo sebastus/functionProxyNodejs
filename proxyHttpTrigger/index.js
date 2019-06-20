@@ -21,7 +21,7 @@ var splunkCertCN = process.env.SPLUNK_CERT_CN || "SplunkServerDefaultCert";
 
 var app = express();
 app.use(require('morgan')('immediate'));
-app.use(require('body-parser').urlencoded({"extended":true}));
+app.use(require('body-parser').text({"type":"text/plain"}));
 app.use(passport.initialize());
 
 if (!tenantId || !clientId || !audience || !splunkAddress || !splunkToken) {
@@ -78,7 +78,7 @@ app.post(
         //console.log("s1: ", s1);
         //console.log("s2: ", s2);
 
-        requestOptions.body = JSON.stringify(req.body);
+        requestOptions.body = req.body;
 
         request.post(requestOptions, function (error, response, body) {
             if (error) {
@@ -93,7 +93,7 @@ app.post(
             } else if (response) {
                 
                 if (response.statusCode != 200) {
-                    console.log('request body: ', JSON.stringify(req.body));
+                    console.log('request body: ', req.body);
                     console.log('requestOptions.body: ', requestOptions.body);
                     console.log('response body: ', JSON.stringify(response.body));
                     console.log('headers: ', JSON.stringify(response.headers));
