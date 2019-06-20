@@ -3,6 +3,8 @@ index2.txt
 *.zip
 proxyHttpTrigger/ssl/splunkcacert-trial.pem
 notes.txt
+node_modules
+local.settings.json
 
 # Logs
 logs
