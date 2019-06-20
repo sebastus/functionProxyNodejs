@@ -25,6 +25,7 @@ var bearerStrategyOptions = {
 
 var BearerStrategy = require("passport-azure-ad").BearerStrategy;
 var bearerStrategy = new BearerStrategy(bearerStrategyOptions, function (token, done) {
+    console.log('token: ', token);
     done(null, {}, token);
 });
 passport.use(bearerStrategy);
