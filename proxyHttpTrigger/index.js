@@ -50,7 +50,7 @@ passport.use(bearerStrategy);
 var requestOptions = {
     url: splunkAddress,
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain',
         'Authorization': 'Splunk ' + splunkToken,
         'Host': splunkCertCN
     },
@@ -58,11 +58,6 @@ var requestOptions = {
         ca: fs.readFileSync(cacertFile)
     }
 };
-// cert: certString,
-// key: keyString,
-// passphrase: 'MoDP@ssWyrd'
-
-// console.log("requestOptions: ", JSON.stringify(requestOptions));
 
 app.use(require('morgan')('combined'));
 
@@ -72,11 +67,7 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
 
-        //console.log("Bearer strategy options: ", JSON.stringify(bearerStrategyOptions));
-        //console.log("AuthInfo: ", JSON.stringify(req.authInfo));
-        
-        //console.log("s1: ", s1);
-        //console.log("s2: ", s2);
+        console.log('request body: ', req.body);
 
         requestOptions.body = req.body;
 
