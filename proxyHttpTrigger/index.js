@@ -73,7 +73,6 @@ app.post(
                 
                 if (response.statusCode != 200) {
                     console.log('request body: ', req.body);
-                    console.log('requestOptions.body: ', requestOptions.body);
                     console.log('response body: ', JSON.stringify(response.body));
                     console.log('headers: ', JSON.stringify(response.headers));
                 }
@@ -85,7 +84,6 @@ app.post(
             }
         });
         
-        res.status(200).end();
     }
 );
 
