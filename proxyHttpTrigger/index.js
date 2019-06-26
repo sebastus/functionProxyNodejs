@@ -54,13 +54,13 @@ app.post(
             headers: {
                 'Content-Type': 'text/plain',
                 'Authorization': 'Splunk ' + splunkToken,
-                'Host': splunkCertCN,
-                'Content-Length': Buffer.byteLength(req.body)
+                'Host': splunkCertCN
             },
             agentOptions: {
                 ca: fs.readFileSync(cacertFile)
             },
-            body: req.body
+            body: req.body,
+            json: (typeof(req.body)=='object', true, false)
         };
         
         request.post(requestOptions, function (error, response, body) {
