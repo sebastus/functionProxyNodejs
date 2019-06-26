@@ -47,7 +47,7 @@ app.post(
     passport.authenticate("oauth-bearer", { session: false }),
     function (req, res) {
 
-        console.log('Received a post from upstream.');
+        //console.log('Received a post from upstream.');
 
         var requestOptions = {
             url: splunkAddress,
@@ -65,19 +65,19 @@ app.post(
         if (typeof(req.body)=='object') {
             requestOptions.json = true;
         } else {
-            console.log('typeof(req.body): ', typeof(req.body));
+            //console.log('typeof(req.body): ', typeof(req.body));
             requestOptions.json = false;
             requestOptions.headers['Content-Length'] = Buffer.byteLength(req.body);
         }
         
         request.post(requestOptions, function (error, response, body) {
 
-            console.log('Callback function for post to Splunk.');
+            //console.log('Callback function for post to Splunk.');
 
             if (error) {
 
-                console.error('An error occurred.');
-                console.error('requestOptions: ', JSON.stringify(requestOptions));
+                //console.error('An error occurred.');
+                //console.error('requestOptions: ', JSON.stringify(requestOptions));
 
                 var msg = '';
                 if (typeof(error) == 'object') {
