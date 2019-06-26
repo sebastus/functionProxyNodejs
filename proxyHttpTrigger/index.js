@@ -3,6 +3,7 @@ var express = require("express");
 var passport = require('passport');
 var util = require('util');
 var request = require('request');
+var serializeError = require('serialize-error');
 
 var fs = require('fs');
 var path = require('path');
@@ -67,18 +68,17 @@ app.post(
 
             if (error) {
 
-                console.error('typeof(error): ', typeof(error));
+                console.error('An error occurred.');
                 console.error('requestOptions: ', JSON.stringify(requestOptions));
 
                 var msg = '';
                 if (typeof(error) == 'object') {
-                    msg = JSON.stringify(error);
+                    msg = serializeError(error);
                 } else {
                     msg = error;
                 }
                 console.error('error:', msg);
 
-                //res.status(500).end();
             } else if (response) {
                 
                 if (response.statusCode != 200) {
@@ -92,7 +92,7 @@ app.post(
             } else {
 
                 res.status(500).end();
-                
+
             }
 
         });        
