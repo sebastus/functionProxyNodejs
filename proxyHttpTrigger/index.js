@@ -61,6 +61,10 @@ app.post(
         
         request.post(requestOptions, function (error, response, body) {
             if (error) {
+                console.error('There was an error.');
+                console.error('typeof(error): ', typeof(error));
+                console.error('requestOptions: ', JSON.stringify(requestOptions));
+
                 var msg = '';
                 if (typeof(error) == 'object') {
                     msg = JSON.stringify(error);
@@ -68,7 +72,7 @@ app.post(
                     msg = error;
                 }
                 console.error('error:', msg);
-                res.status(500).end();
+                //res.status(500).end();
             } else if (response) {
                 
                 if (response.statusCode != 200) {
