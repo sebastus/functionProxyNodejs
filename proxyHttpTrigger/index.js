@@ -60,7 +60,7 @@ app.post(
                 ca: fs.readFileSync(cacertFile)
             },
             body: req.body,
-            json: (typeof(req.body)=='object', true, false)
+            json: true
         };
         
         request.post(requestOptions, function (error, response, body) {
