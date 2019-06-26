@@ -59,9 +59,16 @@ app.post(
             agentOptions: {
                 ca: fs.readFileSync(cacertFile)
             },
-            body: req.body,
-            json: true
+            body: req.body
         };
+
+        if (typeof(req.body)=='object') {
+            requestOptions.json = true;
+        } else {
+            console.log('typeof(req.body): ', typeof(req.body));
+            requestOptions.json = false;
+            requestOptions.headers['Content-Length'] = Buffer.byteLength(req.body);
+        }
         
         request.post(requestOptions, function (error, response, body) {
 
