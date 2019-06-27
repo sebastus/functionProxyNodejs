@@ -89,11 +89,11 @@ app.post(
 
             } else if (response) {
                 
-                if (response.statusCode != 200) {
-                    console.log('request body: ', req.body);
-                    console.log('response body: ', JSON.stringify(response.body));
-                    console.log('headers: ', JSON.stringify(response.headers));
-                }
+                // if (response.statusCode != 200) {
+                    // console.log('request body: ', req.body);
+                    // console.log('response body: ', JSON.stringify(response.body));
+                    // console.log('headers: ', JSON.stringify(response.headers));
+                // }
 
                 res.status(response.statusCode).end();
 
